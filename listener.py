@@ -27,7 +27,7 @@ class Listener:
         self.list_of_notes = ['a', 'bf', 'b', 'c', 'df', 'd', 'ef', 'e', 'f', 'gf', 'g', 'af']
         self.amplitude = 0,
         self.freq = 0
-        self.midinote = []
+        self.neonote = 'a'
 
     def start(self):
         print("mic listener: started!")
@@ -54,10 +54,10 @@ class Listener:
                 self.freq = frq[np.where(fft == np.max(fft))[0][0]] + 1
 
                 #
-                self.midinote = self.freq_to_note(self.freq)
+                self.neonote = self.freq_to_note(self.freq)
 
                 # Shows the peak frequency and the bars for the amplitude
-                print(f"peak frequency: {self.freq} Hz, mididnote {self.midinote}:\t {bars}")
+                print(f"peak frequency: {self.freq} Hz, mididnote {self.neonote}:\t {bars}")
 
             self.amplitude = peak
 
@@ -90,17 +90,6 @@ class Listener:
 
         return [neonote]
 
-    # def read(self) -> list:
-    #     """returns current dictionary as list, as a single quaver"""
-    #     audio_list = []
-    #     audio_list.append("midi")  # type
-    #     if self.audio_dict['amplitude'] > 1000:
-    #         audio_list.append(self.audio_dict.get("midinote"))  # pitch
-    #     else:
-    #         audio_list.append([])  # rest
-    #     audio_list.append(0.5)  # duration
-    #     return audio_list
-
     def terminate(self):
         """safely terminates all streams"""
         self.stream.stop_stream()
@@ -114,6 +103,6 @@ if __name__ == "__main__":
     while True:
         print(mic.freq,
               mic.amplitude,
-              mic.midinote
+              mic.neonote
               )
         sleep(1)
