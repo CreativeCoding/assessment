@@ -20,7 +20,6 @@ def get_midi_lists(mf: str) -> list:
             #
             try:
                 pitchlist = msg.pitches
-                # temp_pitch_list = []
 
                 #
                 for pitch in pitchlist:

@@ -10,8 +10,6 @@ class Listener:
         """INSERT DOC STRING HERE"""
         #
         self.running = True
-        # self.connected = False
-        # self.logging = False
 
         #
         self.CHUNK = 2 ** 11
