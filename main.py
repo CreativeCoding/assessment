@@ -1,8 +1,5 @@
 import midi
-import math
-from random import random, choice, seed
-from time import sleep
-from random import choice
+from random import choice, random
 from listener import Listener
 from neoscore.common import *
 
@@ -50,27 +47,22 @@ class UI:
         """INSERT DOCSTRING HERE"""
 
         #
-        self.n1.x = self.center + Mm(math.sin((time / 2)) * 10)
-        self.n2.x = self.center + Mm(math.sin((time / 2) + 1) * 12)
-        self.n3.x = self.center + Mm(math.sin((time / 2) + 1.7) * 7)
-        self.n4.x = self.center + Mm(math.sin((time / 2) + 2.3) * 15)
+        rnd_note = choice(self.note_list)
+        if random() >= 0.5:
+            new_pitch = choice(self.midilist)
+        else:
+            new_pitch = self.ear.neonote
 
         #
-        if random() >= 0.95:
-            rnd_note = choice(self.note_list)
-            if random() >= 0.5:
-                new_pitch = choice(self.midilist)
-            else:
-                new_pitch = self.ear.neonote
-
-            #
-            try:
-                rnd_note.notes = [new_pitch]
-            except:
-                pass
+        try:
+            rnd_note.notes = [new_pitch]
+        except:
+            pass
 
 
 if __name__ == "__main__":
     run = UI()
-    neoscore.show(run.refresh_func,
-                  display_page_geometry=False)
+    neoscore.set_refresh_func(run.refresh_func, target_fps=1)
+    neoscore.show(display_page_geometry=False,
+                  auto_viewport_interaction_enabled=False
+                  )
